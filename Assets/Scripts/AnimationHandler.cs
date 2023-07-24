@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationHandler : MonoBehaviour
+public class AnimationHandler : PlayerController
 {
-        private float speed=5f;
-    private float xRange=2f;
     float horizontalInput=0;
     // Start is called before the first frame update
     void Start()
@@ -16,7 +14,17 @@ public class AnimationHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position=new Vector3(transform.position.x,0 + transform.localScale.y/2,transform.position.z);
+        KeepOnGround();
+        Move();
+    }
+    //Generate random inputs for simulating player controls.
+    void ChangeScale(){
+        float yScale=Random.Range(1,4);
+            transform.localScale = new Vector3(1,yScale,1);
+                    horizontalInput=Random.Range(1f,-1f);
+    }
+    //Base Movement Script
+    public override void Move(){
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         if(transform.position.x > xRange){
             transform.position=new Vector3(xRange,transform.position.y,transform.position.z);
@@ -29,10 +37,5 @@ public class AnimationHandler : MonoBehaviour
             transform.position=new Vector3(transform.position.x,0 + transform.localScale.y/2,0);
             
         }
-    }
-    void ChangeScale(){
-        float yScale=Random.Range(1,4);
-            transform.localScale = new Vector3(1,yScale,1);
-                    horizontalInput=Random.Range(1f,-1f);
     }
 }

@@ -9,6 +9,10 @@ public class Gate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DisplayValue();
+    }
+
+    void DisplayValue(){
         transform.position=new Vector3(transform.position.x,1,transform.position.z);
         string display;
         if(addValue>0){
@@ -17,11 +21,5 @@ public class Gate : MonoBehaviour
             display=addValue.ToString();
         }
         text.text=display;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
