@@ -95,7 +95,7 @@ BoxCollider:
   m_GameObject: {fileID: 8034276535953662116}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3db639a6d27a5a4c87125c9b4cb568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addValue: -2
+  addValue: -4
   text: {fileID: 8034276535962509364}
 --- !u!1 &8034276535962509362
 GameObject:

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private protected float speed=5f;
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ParticleSystem explosionParticle;
     AudioSource playerAudio;
     [SerializeField] AudioClip explosionAudio;
+    [SerializeField] AudioClip gateAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,10 +35,12 @@ public class PlayerController : MonoBehaviour
             Gate gateScript=other.gameObject.GetComponent<Gate>();
             float add=gateScript.addValue/20;
             transform.localScale += new Vector3(0,add,0);
+            playerAudio.PlayOneShot(gateAudio);
             
         }else if(other.gameObject.CompareTag("Finish")){
             isGameEnded=true;
             winScreen.SetActive(true);
+            DataManager.instance.StoreLevelProgress(SceneManager.GetActiveScene().buildIndex);
         }
     }
     
@@ -46,7 +49,11 @@ public class PlayerController : MonoBehaviour
         
     }
     public virtual void Move(){
- float horizontalInput=Input.GetAxis("Horizontal");
+        float horizontalInput;
+        horizontalInput=Input.GetAxis("Mouse X");
+        if(!Input.GetMouseButton(0)){
+            horizontalInput=0;
+        }
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         if(transform.position.x > xRange){
             transform.position=new Vector3(xRange,transform.position.y,transform.position.z);
