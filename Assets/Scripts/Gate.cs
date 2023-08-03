@@ -7,6 +7,7 @@ public class Gate : MonoBehaviour
     public float addValue;
     public TextMeshPro text;
     public bool isRandom;
+    public bool isFixed=true;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,9 @@ public class Gate : MonoBehaviour
     }
 
     public void DisplayValue(){
+        if(isFixed){
         transform.position=new Vector3(transform.position.x,1,transform.position.z);
+        }
         string display;
         if(addValue>0){
             display="+"+addValue;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class PlayerController : MonoBehaviour
 {
     private protected float speed=5f;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerAudio=GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -50,7 +52,13 @@ public class PlayerController : MonoBehaviour
     }
     public virtual void Move(){
         float horizontalInput;
+        #if UNITY_EDITOR
+        horizontalInput=Input.GetAxis("Mouse X Editor");
+        #else
         horizontalInput=Input.GetAxis("Mouse X");
+        #endif
+        horizontalInput/=1175;
+        horizontalInput*=Screen.width;
         if(!Input.GetMouseButton(0)){
             horizontalInput=0;
         }
